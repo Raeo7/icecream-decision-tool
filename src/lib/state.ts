@@ -123,6 +123,33 @@ function scaleUpOption(): Scenario {
   };
 }
 
+/**
+ * My own workbook figures for Year 1 winter, and my recommendation for Year 2 winter.
+ *
+ * These are part of the submission rather than notes to myself, so they ship with the app instead
+ * of living only in my browser. A save in local storage is per visitor: anything typed into the
+ * page here would be invisible to anyone else opening the site, and the assignment asks for the
+ * recommendation and its assumption to be on the page. Both stay editable.
+ */
+const WORKBOOK = { netProfit: -75175, closingCash: 37950 };
+
+const RECOMMENDATION: RecommendationValue = {
+  scenarioId: "a",
+  why:
+    "Steady requests 70,000 against a 410,000 forecast, about 17% of the market, and needs a " +
+    "38,000 loan on top of the 43,750 already owed. Scale up earns three times as much if the " +
+    "trainer is generous (+41,292 against +13,459), but loses 96,325 rather than 59,350 if it is " +
+    "not, and needs 146,000 of new debt against 37,950 of cash. After a Year 1 that lost 75,175, " +
+    "the company cannot fund a second bad season, so I take the smaller downside and the smaller " +
+    "loan.",
+  assumption:
+    "That the class stops over-asking. Steady only makes money above an 89% fill, and Year 1 " +
+    "winter delivered 29%: six teams requested 620,000 into a market that came to 330,000. If " +
+    "that repeats, Steady loses about 59,350 and survives on the loan, where Scale up would lose " +
+    "96,325 and probably not. If instead the class retreats and fills run above 85%, Scale up was " +
+    "the better call and I will have left about 28,000 on the table.",
+};
+
 export function defaultState(): GameState {
   return {
     version: STATE_VERSION,
@@ -137,8 +164,8 @@ export function defaultState(): GameState {
     ],
     year2Rules: year2Estimate(),
     scenarios: [steadyOption(), scaleUpOption()],
-    verification: { netProfit: null, closingCash: null },
-    recommendation: { scenarioId: null, why: "", assumption: "" },
+    verification: WORKBOOK,
+    recommendation: RECOMMENDATION,
   };
 }
 

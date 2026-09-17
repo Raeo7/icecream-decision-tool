@@ -87,6 +87,40 @@ describe("state", () => {
     }
   });
 
+  it("should ship the workbook figures and the recommendation with the app", () => {
+    // #given a fresh visitor, who has no saved game of their own
+    const state = defaultState();
+
+    // #then the submission is on the page rather than only in my browser. A local storage save
+    // #then is per visitor, so anything typed in here would be invisible to anyone else opening
+    // #then the site, and the assignment asks for the recommendation to be on the page.
+    expect(state.verification).toEqual({ netProfit: -75175, closingCash: 37950 });
+    expect(state.recommendation.scenarioId).not.toBeNull();
+    expect(state.recommendation.why.length).toBeGreaterThan(80);
+    expect(state.recommendation.assumption.length).toBeGreaterThan(80);
+  });
+
+  it("should reconcile against my workbook, not against a figure it invented", () => {
+    // #given the seeded workbook figures and the season the engine computes from the decision
+    const state = defaultState();
+    const winter = state.year1[0]!;
+    const result = runChain(emptyPosition(STARTING_CASH), [
+      { decision: winter.decision, unitsSold: winter.unitsSold, rules: YEAR1_RULES },
+    ])[0]!;
+
+    // #then the two agree, which is what the assignment asks to be shown
+    expect(result.pnl.netProfit).toBe(state.verification.netProfit);
+    expect(result.cash.closing).toBe(state.verification.closingCash);
+  });
+
+  it("should point the recommendation at an option that exists", () => {
+    // #given the chosen strategy
+    const state = defaultState();
+
+    // #then it names one of the options on the page, so the panel can show its figures
+    expect(state.scenarios.map((s) => s.id)).toContain(state.recommendation.scenarioId);
+  });
+
   it("should mark the Year 2 rules as an estimate", () => {
     // #then nothing on the Year 2 page can present a Year 1 price as a confirmed Year 2 one
     expect(defaultState().year2Rules.isEstimate).toBe(true);
