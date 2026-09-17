@@ -1,4 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { runChain } from "@/lib/engine/chain";
+import { runSeason } from "@/lib/engine/season";
+import { emptyPosition } from "@/lib/engine/types";
+import { STARTING_CASH, YEAR1_RULES } from "@/lib/rules";
 import { defaultState, deserialize, serialize, SEASONS } from "@/lib/state";
 
 describe("state", () => {
@@ -55,6 +59,32 @@ describe("state", () => {
   it("should start with two Year 2 options to compare", () => {
     // #then the assignment's minimum is there from the first load
     expect(defaultState().scenarios.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("should start with two options that actually differ", () => {
+    // #given the two options a fresh game offers
+    const [a, b] = defaultState().scenarios;
+
+    // #then they are not the same decision under two names, which would compare nothing
+    expect(a!.decision).not.toEqual(b!.decision);
+    expect(a!.allocations).not.toEqual(b!.allocations);
+  });
+
+  it("should offer options that break no rule at any allocation", () => {
+    // #given each seeded option run from the position winter closes at
+    const state = defaultState();
+    const winter = state.year1[0]!;
+    const opening = runChain(emptyPosition(STARTING_CASH), [
+      { decision: winter.decision, unitsSold: winter.unitsSold, rules: YEAR1_RULES },
+    ])[0]!.closing;
+
+    // #then none of them starts the user off with a plan the rules forbid
+    for (const scenario of state.scenarios) {
+      for (const allocated of Object.values(scenario.allocations)) {
+        const result = runSeason(opening, scenario.decision, allocated, state.year2Rules);
+        expect(result.flags.filter((f) => f.severity === "violation")).toEqual([]);
+      }
+    }
   });
 
   it("should mark the Year 2 rules as an estimate", () => {

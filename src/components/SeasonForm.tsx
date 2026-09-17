@@ -147,9 +147,7 @@ export function SeasonForm({ decision, owned, rules, onChange }: Props) {
                                 type="checkbox"
                                 style={{ width: "auto", marginRight: 4 }}
                                 checked={rental.installedUids.includes(uid)}
-                                onChange={(e) =>
-                                  toggleMachine(premise.id, uid, e.target.checked)
-                                }
+                                onChange={(e) => toggleMachine(premise.id, uid, e.target.checked)}
                               />
                               {uid}
                               {elsewhere !== undefined && elsewhere !== premise.id

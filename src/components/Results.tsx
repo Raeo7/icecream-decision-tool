@@ -87,7 +87,7 @@ export function Results({ result }: { result: SeasonResult }) {
         <table>
           <tbody>
             <tr>
-              <td>Ice creams sold</td>
+              <td>Ice creams allocated and sold</td>
               <td className="num">{money(result.unitsSold)}</td>
             </tr>
             <tr>

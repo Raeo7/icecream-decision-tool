@@ -31,7 +31,7 @@ const LINES: Array<[string, (r: SeasonResult) => number]> = [
 ];
 
 const UNITS: Array<[string, (r: SeasonResult) => number]> = [
-  ["Ice creams sold", (r) => r.unitsSold],
+  ["Ice creams allocated and sold", (r) => r.unitsSold],
   ["Ice cream spoiled", (r) => r.spoiledIceCream],
   ["Milk left unused", (r) => r.unusedMilk],
 ];
@@ -87,7 +87,7 @@ export function Differences({ options }: { options: Option[] }) {
           </select>
         </div>
         <div>
-          <label htmlFor="d-case">under allocation</label>
+          <label htmlFor="d-case">If the trainer allocates</label>
           <select
             id="d-case"
             value={caseName}
@@ -103,8 +103,8 @@ export function Differences({ options }: { options: Option[] }) {
       </div>
 
       <p>
-        Under the <strong>{caseName}</strong> allocation, <strong>{b.name}</strong> makes{" "}
-        <strong>Sh {signed(netDelta)}</strong> net profit against {a.name} and closes with{" "}
+        If the trainer allocates the <strong>{caseName}</strong> figure, <strong>{b.name}</strong>{" "}
+        makes <strong>Sh {signed(netDelta)}</strong> net profit against {a.name} and closes with{" "}
         <strong>Sh {signed(cashDelta)}</strong> cash. The largest single difference is{" "}
         <strong>{biggest.label.toLowerCase()}</strong>, at Sh {signed(biggest.delta)}.
       </p>

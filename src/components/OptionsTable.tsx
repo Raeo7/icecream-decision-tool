@@ -6,7 +6,7 @@ import type { SeasonResult } from "@/lib/engine/types";
 const CASES = ["pessimistic", "expected", "optimistic"] as const;
 
 const ROWS: Array<[string, (r: SeasonResult) => number]> = [
-  ["Ice creams sold", (r) => r.unitsSold],
+  ["Ice creams allocated and sold", (r) => r.unitsSold],
   ["Net profit", (r) => r.pnl.netProfit],
   ["Closing cash", (r) => r.cash.closing],
   ["Lowest cash at any step", (r) => r.cash.lowest],

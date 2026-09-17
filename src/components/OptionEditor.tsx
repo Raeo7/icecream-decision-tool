@@ -32,7 +32,7 @@ export function OptionEditor({ scenario, result, owned, rules, onChange }: Props
         </div>
         {CASES.map((c) => (
           <div key={c}>
-            <label htmlFor={`alloc-${c}`}>{c} allocation (units)</label>
+            <label htmlFor={`alloc-${c}`}>If the trainer allocates &mdash; {c}</label>
             <input
               id={`alloc-${c}`}
               type="number"
@@ -53,10 +53,10 @@ export function OptionEditor({ scenario, result, owned, rules, onChange }: Props
         onChange={(decision) => onChange({ decision })}
       />
 
-      <h3>Rule checks, expected allocation</h3>
+      <h3>Rule checks at the expected allocation</h3>
       <Flags flags={result.expected.flags} />
 
-      <h3>Full results, expected allocation</h3>
+      <h3>Full results at the expected allocation</h3>
       <Results result={result.expected} />
     </div>
   );

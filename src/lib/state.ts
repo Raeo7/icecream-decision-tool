@@ -79,6 +79,50 @@ export function playedCount(seasons: SeasonRecord[]): number {
   return played;
 }
 
+/**
+ * Two Year 2 winter options to start from, so the comparison has something in it on first load.
+ *
+ * They are starting points, not advice: every figure is editable and both are meant to be changed
+ * once the trainer publishes the Year 2 rules. What they are chosen to do is differ in the way
+ * that matters, which is scale. One runs the machine the company already owns; the other buys a
+ * second and borrows to do it. Both keep cash legal at every allocation below.
+ *
+ * The allocations are set at roughly four tenths, seven tenths and all of the request, because
+ * the trainer decides the real one and the point of three cases is to see how far the answer
+ * moves between them.
+ */
+function steadyOption(): Scenario {
+  return {
+    id: "a",
+    name: "Steady",
+    decision: {
+      rentals: [{ premiseId: "D", installedUids: ["new-0"], production: 70000 }],
+      machinePurchases: [],
+      milkTons: 3.5,
+      marketInvestment: 5000,
+      salesRequest: 70000,
+      loan: { principal: 38000, termSeasons: 8 },
+    },
+    allocations: { pessimistic: 30000, expected: 50000, optimistic: 70000 },
+  };
+}
+
+function scaleUpOption(): Scenario {
+  return {
+    id: "b",
+    name: "Scale up",
+    decision: {
+      rentals: [{ premiseId: "E", installedUids: ["new-0", "new-1"], production: 140000 }],
+      machinePurchases: [{ typeId: "1", qty: 1 }],
+      milkTons: 7,
+      marketInvestment: 8000,
+      salesRequest: 140000,
+      loan: { principal: 146000, termSeasons: 8 },
+    },
+    allocations: { pessimistic: 60000, expected: 100000, optimistic: 140000 },
+  };
+}
+
 export function defaultState(): GameState {
   return {
     version: STATE_VERSION,
@@ -92,20 +136,7 @@ export function defaultState(): GameState {
       })),
     ],
     year2Rules: year2Estimate(),
-    scenarios: [
-      {
-        id: "a",
-        name: "Option A",
-        decision: blankDecision(),
-        allocations: { pessimistic: 0, expected: 0, optimistic: 0 },
-      },
-      {
-        id: "b",
-        name: "Option B",
-        decision: blankDecision(),
-        allocations: { pessimistic: 0, expected: 0, optimistic: 0 },
-      },
-    ],
+    scenarios: [steadyOption(), scaleUpOption()],
     verification: { netProfit: null, closingCash: null },
     recommendation: { scenarioId: null, why: "", assumption: "" },
   };

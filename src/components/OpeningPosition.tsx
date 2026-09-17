@@ -43,7 +43,7 @@ export function OpeningPosition({ opening, rules, annualProfit }: Props) {
               <td className="num">{money(annualProfit)}</td>
             </tr>
             <tr>
-              <td>Year 2 winter demand forecast</td>
+              <td>Year 2 winter market forecast</td>
               <td className="num">{money(FORECAST.year2.winter)}</td>
             </tr>
           </tbody>

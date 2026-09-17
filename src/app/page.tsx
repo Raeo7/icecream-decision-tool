@@ -73,7 +73,7 @@ export default function Year1Page() {
                 <th>Season</th>
                 <th>Status</th>
                 <th className="num">Forecast</th>
-                <th className="num">Sold</th>
+                <th className="num">Allocated</th>
                 <th className="num">Net profit</th>
                 <th className="num">Closing cash</th>
                 <th>Rules</th>
@@ -146,12 +146,13 @@ export default function Year1Page() {
               </span>
             </div>
             <p className="lede">
-              {record.season} is forecast at {FORECAST.year1[record.season].toLocaleString()}, and
-              the real market runs up to 20% either side of that, so anywhere from{" "}
+              The forecast for {record.season} is {FORECAST.year1[record.season].toLocaleString()},
+              and the real market runs up to 20% either side of it, so anywhere from{" "}
               {marketBand(FORECAST.year1[record.season]).low.toLocaleString()} to{" "}
-              {marketBand(FORECAST.year1[record.season]).high.toLocaleString()}. The trainer divides
-              it between the six companies, so what you enter below is what you were given, or what
-              you expect to be given.
+              {marketBand(FORECAST.year1[record.season]).high.toLocaleString()}. A forecast is not a
+              promise of sales: the trainer divides the market between the six companies and
+              allocates what each may sell. Enter below what you were allocated, or what you expect
+              to be.
             </p>
 
             <div className="grid">
@@ -167,7 +168,7 @@ export default function Year1Page() {
                 </select>
               </div>
               <div className="field">
-                <label htmlFor={`sold-${index}`}>Ice creams allocated by the trainer</label>
+                <label htmlFor={`sold-${index}`}>Ice creams the trainer allocated</label>
                 <input
                   id={`sold-${index}`}
                   name={`allocated-${record.season}`}
