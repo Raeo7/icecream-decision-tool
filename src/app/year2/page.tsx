@@ -129,6 +129,7 @@ export default function Year2Page() {
 
       <Recommendation
         scenarios={state.scenarios}
+        options={options}
         value={state.recommendation}
         onChange={(recommendation) => setState({ ...state, recommendation })}
       />
