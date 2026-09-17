@@ -99,7 +99,7 @@ export function SeasonForm({ decision, owned, rules, onChange }: Props) {
   return (
     <div>
       <h4>Premises rented</h4>
-      <p className="badge">
+      <p className="lede">
         Rent as many as you like, and put the machines where you ran them. What each premise makes
         follows from that and the milk you bought, so there is nothing to type: milk turns into ice
         cream on its own, and the premise that is cheapest to move goods out of is filled first.

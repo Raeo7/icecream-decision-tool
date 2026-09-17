@@ -13,7 +13,7 @@ import { runSeason } from "@/lib/engine/season";
 import { blankDecision, emptyPosition } from "@/lib/engine/types";
 import { useGame } from "@/lib/GameProvider";
 import { FORECAST, STARTING_CASH, YEAR1_RULES } from "@/lib/rules";
-import type { GameState, Scenario } from "@/lib/state";
+import { playedCount, type GameState, type Scenario } from "@/lib/state";
 
 function withNewOption(state: GameState): GameState {
   return {
@@ -42,7 +42,11 @@ export default function Year2Page() {
       rules: YEAR1_RULES,
     })),
   );
-  const opening = year1.at(-1)?.closing ?? emptyPosition(STARTING_CASH);
+  // Year 2 opens on what the company actually is, which is the last season it has really played.
+  // Seasons the team has only projected are not carried in as though they had happened.
+  const played = playedCount(state.year1);
+  const opening =
+    (played > 0 ? year1[played - 1]?.closing : undefined) ?? emptyPosition(STARTING_CASH);
   const rules = state.year2Rules;
 
   if (!ready) return <p className="quiet">Loading your game&hellip;</p>;
@@ -68,15 +72,16 @@ export default function Year2Page() {
     <>
       <h1>Year 2 winter</h1>
       <p className="advisory">
-        The Year 2 rules are not published yet. Every price below is a Year 1 figure carried forward
-        as an estimate. The opening position also rests on your projected Year 1 spring, summer and
-        autumn — so compare the options against each other, not against reality.
+        The Year 2 rules are not published yet, so every price below is a Year 1 figure carried
+        forward as an estimate. The opening position is where Year 1 stands after the {played}{" "}
+        {played === 1 ? "season" : "seasons"} actually played, not after a full year, so compare the
+        options against each other rather than against reality.
       </p>
 
       <OpeningPosition
         opening={opening}
         rules={rules}
-        annualProfit={year1.reduce((sum, r) => sum + r.pnl.netProfit, 0)}
+        annualProfit={year1.slice(0, played).reduce((sum, r) => sum + r.pnl.netProfit, 0)}
       />
 
       <Year2Assumptions

@@ -17,24 +17,30 @@ pnpm check        # types, lint and tests
 ### Year 1
 
 Winter is the season the team played, seeded from its own workbook: premise D, one Machine 1,
-3.5 tons of milk, Sh 5,000 on the market, a 50,000 loan over four seasons, and the 20,000 ice
+3.5 tons of milk, Sh 5,000 on the market, a 50,000 loan over eight seasons, and the 20,000 ice
 creams the trainer allocated. Spring, summer and autumn are the team's own projection — each one
 is entered by hand and the year runs on from the position the season before it closed at.
 
-Every season shows its profit and loss, its cash flow, and any rule it breaks. The year's closing
-position is what the Year 2 page opens on.
+Only seasons that have actually been played count. A projection is shown in full, so the form is
+worth filling in before the season is played, but it is not added into the year's profit and it is
+not carried into Year 2 as though it had happened. Mark a season played once it has been, and it
+joins both.
+
+Every season shows its profit and loss, its cash flow, and any rule it breaks, and the year table
+says which seasons are legal so a plan that would run cash negative is visible without opening it.
 
 **Checking it against the classroom model.** The assignment asks for one real Year 1 season to
 reconcile against the model the team keeps by hand, so winter has a panel for exactly that: type
 the workbook's net profit and closing cash and the page says whether they match and by how much if
 not. Two models built from the same rules that disagree mean one of them is wrong, and until they
-agree neither is worth deciding from. This app reports **−75,175** net profit and **31,700**
+agree neither is worth deciding from. This app reports **−75,175** net profit and **37,950**
 closing cash for winter.
 
 ### Year 2 winter
 
-Opens on what Year 1 autumn closes at: cash, machines with their remaining lives, loans still
-outstanding, unused tax losses, and Year 1's annual profit for reference.
+Opens on where Year 1 actually stands — the position after the last season really played, with
+cash, machines and their remaining lives, loans still outstanding, unused tax losses, and the
+profit of the seasons played so far.
 
 Two options are set up to compare, and more can be added. Each carries a full decision — premises
 rented, machines running in each, milk bought, ice creams requested, market investment and

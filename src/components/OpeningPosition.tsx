@@ -19,34 +19,36 @@ export function OpeningPosition({ opening, rules, annualProfit }: Props) {
   return (
     <section className="panel">
       <h2>Where you start</h2>
-      <table>
-        <tbody>
-          <tr>
-            <td>Closing cash after Year 1</td>
-            <td className="num">{money(opening.cash)}</td>
-          </tr>
-          <tr>
-            <td>Machines owned (remaining life, seasons)</td>
-            <td className="num">{lives}</td>
-          </tr>
-          <tr>
-            <td>Loans outstanding</td>
-            <td className="num">{money(debt)}</td>
-          </tr>
-          <tr>
-            <td>Unused tax losses</td>
-            <td className="num">{money(opening.taxLossPool)}</td>
-          </tr>
-          <tr>
-            <td>Year 1 annual profit</td>
-            <td className="num">{money(annualProfit)}</td>
-          </tr>
-          <tr>
-            <td>Year 2 winter demand forecast</td>
-            <td className="num">{money(FORECAST.year2.winter)}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="scroll-x">
+        <table>
+          <tbody>
+            <tr>
+              <td>Closing cash after Year 1</td>
+              <td className="num">{money(opening.cash)}</td>
+            </tr>
+            <tr>
+              <td>Machines owned (remaining life, seasons)</td>
+              <td className="num">{lives}</td>
+            </tr>
+            <tr>
+              <td>Loans outstanding</td>
+              <td className="num">{money(debt)}</td>
+            </tr>
+            <tr>
+              <td>Unused tax losses</td>
+              <td className="num">{money(opening.taxLossPool)}</td>
+            </tr>
+            <tr>
+              <td>Year 1 annual profit</td>
+              <td className="num">{money(annualProfit)}</td>
+            </tr>
+            <tr>
+              <td>Year 2 winter demand forecast</td>
+              <td className="num">{money(FORECAST.year2.winter)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

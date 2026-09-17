@@ -82,15 +82,19 @@ describe("runSeason", () => {
       milkTons: 3.5,
       marketInvestment: 5000,
       salesRequest: 70000,
-      loan: { principal: 50000, termSeasons: 4 },
+      loan: { principal: 50000, termSeasons: 8 },
     };
 
     const result = runSeason(emptyPosition(100000), decision, 20000, YEAR1_RULES);
 
+    // #then the season matches the team's own workbook. The loan runs the full eight seasons the
+    // #then handout allows, so the principal falls 6,250 a season and interest is 10% of the
+    // #then 50,000 still outstanding; the profit is the same either way, only the cash differs.
     expect(result.pnl.netProfit).toBe(-75175);
-    expect(result.cash.closing).toBe(31700);
+    expect(result.pnl.interest).toBe(-5000);
+    expect(result.cash.closing).toBe(37950);
     expect(result.closing.taxLossPool).toBe(75175);
-    expect(result.closing.loans[0]!.outstanding).toBe(37500);
+    expect(result.closing.loans[0]!.outstanding).toBe(43750);
     expect(result.spoiledIceCream).toBe(50000);
     expect(result.flags.filter((f) => f.severity === "violation")).toEqual([]);
   });

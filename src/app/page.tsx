@@ -10,7 +10,7 @@ import { marketBand } from "@/lib/engine/market";
 import { emptyPosition, type Flag } from "@/lib/engine/types";
 import { useGame } from "@/lib/GameProvider";
 import { FORECAST, STARTING_CASH, YEAR1_RULES } from "@/lib/rules";
-import type { SeasonRecord } from "@/lib/state";
+import { playedCount, type SeasonRecord } from "@/lib/state";
 
 /** Whether a season breaks a rule, said in the year table rather than only inside the season. */
 function verdict(flags: Flag[]) {
@@ -43,7 +43,10 @@ export default function Year1Page() {
   const winter = results[0];
   if (!ready || winter === undefined) return <p className="quiet">Loading your game&hellip;</p>;
 
-  const annual = results.reduce((sum, r) => sum + r.pnl.netProfit, 0);
+  // Only seasons that have actually happened count towards the year. The rest are the team's own
+  // projection: shown, so the form is worth filling in, but not added up as though they were real.
+  const played = playedCount(state.year1);
+  const soFar = results.slice(0, played).reduce((sum, r) => sum + r.pnl.netProfit, 0);
 
   const update = (index: number, changes: Partial<SeasonRecord>) =>
     setState({
@@ -56,9 +59,9 @@ export default function Year1Page() {
       <h1>Year 1</h1>
       <p className="lede">
         Winter is the season the team played, as recorded in its own workbook. Spring, summer and
-        autumn are the team&rsquo;s own projection: fill each one in and the year runs on from the
-        position the season before it closed at. What autumn closes at is where the Year 2 tool
-        starts.
+        autumn are the team&rsquo;s own projection: fill each one in to see what it would do, and
+        mark it played once it has been. Only seasons that have actually been played count towards
+        the year, and only those are carried into the Year 2 tool.
       </p>
 
       <section className="panel">
@@ -88,7 +91,13 @@ export default function Year1Page() {
                       {record.season}
                     </button>
                   </td>
-                  <td>{record.played ? "played" : "your projection"}</td>
+                  <td>
+                    {record.played ? (
+                      "played"
+                    ) : (
+                      <span className="quiet">projection, not counted yet</span>
+                    )}
+                  </td>
                   <td className="num">{FORECAST.year1[record.season].toLocaleString()}</td>
                   <td className="num">{record.unitsSold.toLocaleString()}</td>
                   <td className="num">
@@ -101,9 +110,12 @@ export default function Year1Page() {
                 </tr>
               ))}
               <tr className="total">
-                <td colSpan={4}>Year 1 annual profit</td>
+                <td colSpan={4}>
+                  Year 1 so far &mdash; {played} of {state.year1.length}{" "}
+                  {state.year1.length === 1 ? "season" : "seasons"} played
+                </td>
                 <td className="num">
-                  <Figure value={annual} />
+                  <Figure value={soFar} />
                 </td>
                 <td />
               </tr>

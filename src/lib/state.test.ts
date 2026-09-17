@@ -39,7 +39,7 @@ describe("state", () => {
     expect(winter.unitsSold).toBe(20000);
     expect(winter.decision.rentals[0]?.premiseId).toBe("D");
     expect(winter.decision.milkTons).toBe(3.5);
-    expect(winter.decision.loan).toEqual({ principal: 50000, termSeasons: 4 });
+    expect(winter.decision.loan).toEqual({ principal: 50000, termSeasons: 8 });
   });
 
   it("should leave the seasons still to come for the team to fill in", () => {

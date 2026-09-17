@@ -58,9 +58,25 @@ function recordedWinter(): SeasonRecord {
       milkTons: 3.5,
       marketInvestment: 5000,
       salesRequest: 70000,
-      loan: { principal: 50000, termSeasons: 4 },
+      loan: { principal: 50000, termSeasons: 8 },
     },
   };
+}
+
+/**
+ * How many seasons have actually been played.
+ *
+ * A season can only be played after the one before it, so this is the leading run rather than a
+ * count of ticked boxes. Everything after it is the team's own projection and is not counted
+ * towards the year or carried into Year 2.
+ */
+export function playedCount(seasons: SeasonRecord[]): number {
+  let played = 0;
+  for (const season of seasons) {
+    if (!season.played) break;
+    played += 1;
+  }
+  return played;
 }
 
 export function defaultState(): GameState {

@@ -82,7 +82,7 @@ export function Results({ result }: { result: SeasonResult }) {
         </table>
       </div>
 
-      <div>
+      <div className="scroll-x">
         <h3>Season</h3>
         <table>
           <tbody>

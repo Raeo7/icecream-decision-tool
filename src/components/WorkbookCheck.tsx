@@ -73,7 +73,7 @@ export function WorkbookCheck({
             type="number"
             inputMode="numeric"
             autoComplete="off"
-            placeholder="e.g. 31700"
+            placeholder="e.g. 37950"
             value={workbookClosingCash ?? ""}
             onChange={(e) =>
               onChange({

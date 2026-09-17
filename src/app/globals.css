@@ -262,6 +262,10 @@ tbody tr:hover td {
 .scroll-x {
   overflow-x: auto;
   overscroll-behavior-x: contain;
+  max-width: 100%;
+  /* A grid or flex child sizes to its content unless told otherwise, and a wide table inside one
+     would push the whole page sideways rather than scrolling within its own box. */
+  min-width: 0;
 }
 
 /* ---- notices --------------------------------------------------------- */
@@ -429,6 +433,10 @@ summary:hover {
 }
 
 /* ---- utility --------------------------------------------------------- */
+
+.grid > * {
+  min-width: 0;
+}
 
 .grid {
   display: grid;
