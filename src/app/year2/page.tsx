@@ -43,7 +43,7 @@ export default function Year2Page() {
     })),
   );
   // Year 2 opens on what the company actually is, which is the last season it has really played.
-  // Seasons the team has only projected are not carried in as though they had happened.
+  // Seasons only projected are not carried in as though they had happened.
   const played = playedCount(state.year1);
   const opening =
     (played > 0 ? year1[played - 1]?.closing : undefined) ?? emptyPosition(STARTING_CASH);

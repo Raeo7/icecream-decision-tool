@@ -43,7 +43,7 @@ export default function Year1Page() {
   const winter = results[0];
   if (!ready || winter === undefined) return <p className="quiet">Loading your game&hellip;</p>;
 
-  // Only seasons that have actually happened count towards the year. The rest are the team's own
+  // Only seasons that have actually happened count towards the year. The rest are my own
   // projection: shown, so the form is worth filling in, but not added up as though they were real.
   const played = playedCount(state.year1);
   const soFar = results.slice(0, played).reduce((sum, r) => sum + r.pnl.netProfit, 0);
@@ -58,10 +58,10 @@ export default function Year1Page() {
     <>
       <h1>Year 1</h1>
       <p className="lede">
-        Winter is the season the team played, as recorded in its own workbook. Spring, summer and
-        autumn are the team&rsquo;s own projection: fill each one in to see what it would do, and
-        mark it played once it has been. Only seasons that have actually been played count towards
-        the year, and only those are carried into the Year 2 tool.
+        Winter is the season the company played, recorded from my own workbook. Spring, summer and
+        autumn are my projection: fill each one in to see what it would do, and mark it played once
+        it has been. Only seasons that have actually been played count towards the year, and only
+        those are carried into the Year 2 tool.
       </p>
 
       <section className="panel">

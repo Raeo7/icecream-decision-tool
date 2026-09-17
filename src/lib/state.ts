@@ -12,7 +12,7 @@ export interface SeasonRecord {
   /** True for a season actually played, where unitsSold is the trainer's real allocation. */
   played: boolean;
   decision: Decision;
-  /** Ice creams the trainer allocated, or the team's own projection for a season still to come. */
+  /** Ice creams the trainer allocated, or my own projection for a season still to come. */
   unitsSold: number;
 }
 
@@ -41,12 +41,12 @@ export interface GameState {
   year1: SeasonRecord[];
   year2Rules: Rules;
   scenarios: Scenario[];
-  /** The team's own workbook figures for winter, to check this app against. */
+  /** My own workbook figures for winter, to check this app against. */
   verification: { netProfit: number | null; closingCash: number | null };
   recommendation: RecommendationValue;
 }
 
-/** Year 1 winter as the team actually played it, from its own workbook. */
+/** Year 1 winter as the company actually played it, recorded from my own workbook. */
 function recordedWinter(): SeasonRecord {
   return {
     season: "winter",
@@ -67,7 +67,7 @@ function recordedWinter(): SeasonRecord {
  * How many seasons have actually been played.
  *
  * A season can only be played after the one before it, so this is the leading run rather than a
- * count of ticked boxes. Everything after it is the team's own projection and is not counted
+ * count of ticked boxes. Everything after it is my own projection and is not counted
  * towards the year or carried into Year 2.
  */
 export function playedCount(seasons: SeasonRecord[]): number {
@@ -172,7 +172,7 @@ export function loadState(): GameState {
   const state = deserialize(raw);
   if (state !== null) return state;
 
-  // A save this version cannot read is still the team's own work. Falling through to a fresh game
+  // A save this version cannot read is still my own work. Falling through to a fresh game
   // would be written straight over it by the next keystroke, so the original is kept aside.
   try {
     window.localStorage.setItem(SALVAGE_KEY, raw);

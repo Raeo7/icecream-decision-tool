@@ -1,7 +1,8 @@
 # Pork & Garlic Ice Cream — Year 2 Decision Tool
 
-Team 7's tool for Day 1 Home Assignment 1. It carries the company forward from Year 1 and compares
-Year 2 winter strategies from the position Year 1 closes at.
+My model of Team 7's company, built for Day 1 Home Assignment 1. The team decides the seasons
+together; this is my own accounting model of them, and my own comparison of Year 2 winter
+strategies from the position Year 1 closes at.
 
 Built with Next.js and TypeScript. The accounting is a separate layer with no React in it, so the
 figures can be tested against the handout directly.
@@ -16,21 +17,20 @@ pnpm check        # types, lint and tests
 
 ### Year 1
 
-Winter is the season the team played, seeded from its own workbook: premise D, one Machine 1,
+Winter is the season the company played, seeded from my own workbook: premise D, one Machine 1,
 3.5 tons of milk, Sh 5,000 on the market, a 50,000 loan over eight seasons, and the 20,000 ice
-creams the trainer allocated. Spring, summer and autumn are the team's own projection — each one
-is entered by hand and the year runs on from the position the season before it closed at.
+creams the trainer allocated. Spring, summer and autumn are my own projection — each one is
+entered by hand and the year runs on from the position the season before it closed at.
 
 Only seasons that have actually been played count. A projection is shown in full, so the form is
 worth filling in before the season is played, but it is not added into the year's profit and it is
-not carried into Year 2 as though it had happened. Mark a season played once it has been, and it
-joins both.
+not carried into Year 2 as though it had happened. A season marked played joins both.
 
 Every season shows its profit and loss, its cash flow, and any rule it breaks, and the year table
 says which seasons are legal so a plan that would run cash negative is visible without opening it.
 
 **Checking it against the classroom model.** The assignment asks for one real Year 1 season to
-reconcile against the model the team keeps by hand, so winter has a panel for exactly that: type
+reconcile against the model I keep by hand, so winter has a panel for exactly that: type
 the workbook's net profit and closing cash and the page says whether they match and by how much if
 not. Two models built from the same rules that disagree mean one of them is wrong, and until they
 agree neither is worth deciding from. This app reports **−75,175** net profit and **37,950**
@@ -64,8 +64,8 @@ estimate, and is editable. Nothing here presents a Year 1 price as a confirmed Y
 
 The rules are in `src/lib/rules.ts` and the accounting in `src/lib/engine/`. It is plain
 TypeScript with no React and no input or output, and it never throws: a broken rule comes back as
-a flag on the result, so the same checks run behind a season the team records and an option it is
-still considering.
+a flag on the result, so the same checks run behind a season already recorded and an option still
+being weighed.
 
 It is tested against the handout rather than against itself. The worked examples in the handout
 are tests: the section 11 season, the loan schedule with its declining-balance interest, and the

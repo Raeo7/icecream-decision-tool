@@ -17,7 +17,7 @@ function Verdict({ app, workbook }: { app: number; workbook: number | null }) {
 }
 
 /**
- * The season checked against the model the team keeps by hand.
+ * The season checked against the accounting model I keep by hand.
  *
  * The assignment asks for one real Year 1 season to be entered and reconciled, and it is worth
  * more than the mark: two models built from the same rules that disagree mean one of them is
@@ -42,8 +42,8 @@ export function WorkbookCheck({
         )}
       </div>
       <p className="lede">
-        Type winter&rsquo;s figures from your own workbook. This app does not assume what they are.
-        Where the two disagree, find the difference before trusting either.
+        Type winter&rsquo;s figures from my own workbook. This app does not assume what they are.
+        Where the two disagree, the difference is worth finding before trusting either.
       </p>
 
       <div className="grid">
